@@ -1,5 +1,4 @@
 import mongoose, { Document } from "mongoose";
-import user from "../routes/user";
 import { baseFields } from "./common";
 import OfferType, { Interaction } from "./types/offerType";
 import SkillType from "./types/skillType";
@@ -14,16 +13,11 @@ const Offer = mongoose.model("Offer", offerSchema);
 export async function find(query: any) {
   return await Offer.findOne(query).exec();
 }
-export async function modify(
-  id: string,
-  requiredSkills?: [],
-  interactions?: []
-) {
+export async function modify(id: string, requiredSkills?: SkillType[]) {
   Offer.updateOne(
     { _id: id },
     {
       requiredSkills: requiredSkills,
-      interactions: interactions,
       lastModified: new Date(),
     }
   );

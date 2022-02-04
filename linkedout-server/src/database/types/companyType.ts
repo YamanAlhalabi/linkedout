@@ -6,7 +6,7 @@ export default interface CompanyType extends BasicType {
   info: CompanyInfo;
 }
 
-interface CompanyInfo {
+export interface CompanyInfo {
   logoUrl?: string;
   workTitle?: string;
   description?: string;

@@ -16,6 +16,6 @@ export function getLoginToken(userId: string) {
   return token;
 }
 
-export function decodeToken(token: string): Record<string, any> {
+export function decodeToken(token: string): string {
   return jwt.decode(token) as any;
 }

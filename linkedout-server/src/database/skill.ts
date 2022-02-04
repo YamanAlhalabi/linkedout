@@ -10,13 +10,13 @@ const skillSchema = new mongoose.Schema<SkillType & Document>({
 
 const Skill = mongoose.model("Skill", skillSchema);
 
-async function create(title: string, experince: Date) {
+export async function create(title: string, experince: Date) {
   return await Skill.insertMany({
     title: title,
     timeExperince: experince,
   });
 }
 
-async function find(query: any) {
+export async function find(query: any) {
   const result = await Skill.findOne(query).exec();
 }

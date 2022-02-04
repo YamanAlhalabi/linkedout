@@ -1,7 +1,7 @@
 import mongoose, { Document } from "mongoose";
 import { find as findUser } from "./user";
 import { baseFields } from "./common";
-import CompanyType from "./types/companyType";
+import CompanyType, { CompanyInfo } from "./types/companyType";
 
 const companySchema = new mongoose.Schema<CompanyType & Document>({
   name: "string",
@@ -18,25 +18,11 @@ const companySchema = new mongoose.Schema<CompanyType & Document>({
 });
 
 const Company = mongoose.model("Company", companySchema);
-export async function modify(
-  id: string,
-  newValue: {
-    name?: "string";
-    adminId?: "string";
-    info?: {
-      logoUrl?: "string";
-      workTitle?: "string";
-      description?: "string";
-      email?: "string";
-      website?: "string";
-      phone?: [];
-    };
-  }
-) {
+export async function modify(id: string, info: CompanyInfo) {
   Company.updateOne(
     { _id: id },
     {
-      ...newValue,
+      info: info,
       lastModified: new Date(),
     }
   );
