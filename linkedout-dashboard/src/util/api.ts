@@ -10,15 +10,15 @@ export const endpoints: { [endpoint: string]: string } = {
   createCompany: "/api/company/create",
 };
 
-export async function sendRequest<R = any>({
-  args,
+export async function sendRequest<R>({
+  args = {},
   method = "post",
-  endpoint,
+  endpoint = "",
   auth = true,
-}: Args) {
+}) {
   const token = (await getGlobalConfig().getTokens()).token;
 
-  const res = await fetch(withServerUrl(endpoint), {
+  const res = await fetch(endpoints[endpoint], {
     method: method,
     mode: "cors",
     headers: removeUndefined({

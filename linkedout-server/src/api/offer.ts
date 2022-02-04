@@ -6,7 +6,6 @@ import {
   interact as interactWithOffer,
 } from "../database/offer";
 
-import SkillType from "../database/types/skillType";
 import { decodeToken } from "../util/auth";
 
 export async function create(request: Request, response: Response) {

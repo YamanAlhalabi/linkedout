@@ -1,11 +1,11 @@
-async function createUser(name: string, email: string, password: string) {}
+async function create(name: string, email: string, password: string) {}
 
-async function modifyUser(token: string, data: string) {}
+async function modify(token: string, data: string) {}
 
-async function loginUser(email: string, password: string) {}
+async function login(email: string, password: string) {}
 
-async function getUser(id: string) {}
+async function get(id: string) {}
 
-async function findUser(name: string) {}
+async function find(name: string) {}
 
-export { createUser, modifyUser, loginUser, getUser, findUser };
+export { create, modify, login, get, find };
