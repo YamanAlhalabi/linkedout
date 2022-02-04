@@ -1,12 +1,17 @@
 import { Request, Response } from "express";
-import { create, find, login, modify } from "../database/user";
+import {
+  create as createUser,
+  find as findUser,
+  login as loginUser,
+  modify as modifyUser,
+} from "../database/user";
 import {
   checkForWeirdCharacters,
   handleErorr,
   validateEmail,
 } from "../util/api";
 
-async function createUser(request: Request, response: Response) {
+async function create(request: Request, response: Response) {
   const { name, email, password } = request.body;
 
   if (checkForWeirdCharacters(name)) {
@@ -18,36 +23,36 @@ async function createUser(request: Request, response: Response) {
     return;
   }
 
-  create({ name: name, email: email, password: password });
+  createUser({ name: name, email: email, password: password });
 }
 
-async function modifyUser(request: Request, response: Response) {
+async function modify(request: Request, response: Response) {
   const { token, data } = request.body;
   if (!token) {
     handleErorr("bad token", response);
   }
 
-  modify(token, data);
+  modifyUser(token, data);
 }
 
-async function loginUser(request: Request, response: Response) {
+async function login(request: Request, response: Response) {
   const { email, password } = request.body;
 
-  var token = await login(email, password);
+  var token = await loginUser(email, password);
 
   response.send(token);
 }
 
-async function getUser(request: Request, response: Response) {
+async function get(request: Request, response: Response) {
   const { id } = request.body;
-  var queryResult = await find({ _id: { $eq: id } });
-  return queryResult;
+  var queryResult = await findUser({ _id: { $eq: id } });
+  response.send(queryResult);
 }
 
-async function findUser(request: Request, response: Response) {
+async function find(request: Request, response: Response) {
   const { name } = request.body;
-  var queryResult = await find({ name: { $text: name } });
-  return queryResult;
+  var queryResult = await findUser({ name: { $text: name } });
+  response.send(queryResult);
 }
 
-export { createUser, modifyUser, loginUser, getUser, findUser };
+export { create, modify, login, get, find };

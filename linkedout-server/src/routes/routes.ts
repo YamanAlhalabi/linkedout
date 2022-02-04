@@ -1,3 +1,4 @@
+import company from "./company";
 import offer from "./offer";
 import skill from "./skill";
 import user from "./user";

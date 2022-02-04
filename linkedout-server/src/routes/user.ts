@@ -1,22 +1,16 @@
-import {
-  createUser,
-  findUser,
-  getUser,
-  loginUser,
-  modifyUser,
-} from "../api/user";
+import { create, modify, login, get, find } from "../api/user";
 
 import { getRoutes, postRoutes } from "./router";
 
 export default function user() {
   /* --POST REQUESTS-- */
 
-  postRoutes["/api/user/create"] = { action: createUser };
-  postRoutes["/api/user/modify"] = { action: modifyUser };
-  postRoutes["/api/user/login"] = { action: loginUser };
+  postRoutes["/api/user/create"] = { action: create };
+  postRoutes["/api/user/modify"] = { action: modify };
+  postRoutes["/api/user/login"] = { action: login };
 
   /* --GET REQUESTS-- */
 
-  getRoutes["/api/user/get"] = { action: getUser };
-  getRoutes["/api/user/find"] = { action: findUser };
+  getRoutes["/api/user/get"] = { action: get };
+  getRoutes["/api/user/find"] = { action: find };
 }

@@ -1,9 +1,13 @@
 export const endpoints: { [endpoint: string]: string } = {
+  // Users
   createUser: "/api/user/create",
   modifyUser: "/api/user/modify",
   loginUser: "/api/user/login",
   getUser: "/api/user/get",
   findUser: "/api/user/find",
+
+  // Companys
+  createCompany: "/api/company/create",
 };
 
 export async function sendRequest<R = any>({

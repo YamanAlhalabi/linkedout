@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import {
   create as createOffer,
   find as findOffer,
@@ -5,31 +6,30 @@ import {
   interact as interactWithOffer,
 } from "../database/offer";
 
-import OfferType, { Interaction } from "../database/types/offerType";
 import SkillType from "../database/types/skillType";
 import { decodeToken } from "../util/auth";
 
-export async function create(token: string, requiredSkills: SkillType[]) {
+export async function create(request: Request, response: Response) {
+  const { token, requiredSkills } = request.body;
   if (token) createOffer(requiredSkills);
 }
 
-export async function modify(
-  token: string,
-  admin: string,
-  id: string,
-  newValue: SkillType[]
-) {
+export async function modify(request: Request, response: Response) {
+  const { token, admin, id, newValue } = request.body;
   if (decodeToken(token) == admin) modifyOffer(id, newValue);
 }
 
-export async function get(id: string) {
+export async function get(request: Request, response: Response) {
+  const { id } = request.body;
   return findOffer({ id: { $eq: id } });
 }
 
-export async function find(title: string) {
+export async function find(request: Request, response: Response) {
+  const { title } = request.body;
   return findOffer({ title: { $text: title } });
 }
 
-export async function interact(offerId: string, interaction: Interaction) {
+export async function interact(request: Request, response: Response) {
+  const { offerId, interaction } = request.body;
   interactWithOffer(offerId, interaction);
 }
